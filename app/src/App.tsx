@@ -5,7 +5,7 @@ import axios from "axios";
 type Todo = {
   id: number;
   title: string;
-  year: number;
+  year: any;
   completed: boolean;
   setEditIndex: (value: React.SetStateAction<number>) => void;
 };
@@ -28,6 +28,7 @@ const App = () => {
   const addTodo = async (): Promise<void> => {
     const response = await axios.post<Todo>("http://localhost:5000/todos", {
       title: newTodo,
+      year: "",
       completed: false,
     });
 
@@ -113,6 +114,12 @@ const App = () => {
                   <input
                     type="text"
                     placeholder={todo.title}
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder={todo.year}
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
                   />
